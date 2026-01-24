@@ -45,6 +45,11 @@ async function ensureDirectories() {
   }
 }
 
+// Utility function to remove .js extension from filename
+function removeJsExtension(filename: string): string {
+  return filename.replace(/\.js$/, '');
+}
+
 // Execute k6 command
 async function executeK6Command(args: string[]): Promise<{ stdout: string; stderr: string; exitCode: number }> {
   return new Promise((resolve, reject) => {
@@ -252,8 +257,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           output: result.stdout + result.stderr
         };
         
-        // Remove .js extension properly (only from the end)
-        const testNameWithoutExt = testFile.replace(/\.js$/, '');
+        const testNameWithoutExt = removeJsExtension(testFile);
         const resultFileName = `${testNameWithoutExt}-${Date.now()}.json`;
         const resultPath = join(K6_RESULTS_DIR, resultFileName);
         await writeFile(resultPath, JSON.stringify(resultData, null, 2), 'utf-8');
@@ -312,8 +316,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         
         let filteredFiles = resultFiles;
         if (testName) {
-          // Remove .js extension properly (only from the end)
-          const searchName = testName.replace(/\.js$/, '');
+          const searchName = removeJsExtension(testName);
           filteredFiles = resultFiles.filter(f => f.startsWith(searchName));
         }
 
@@ -399,6 +402,15 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         // Use JSON.stringify for safe string escaping (removes quotes)
         const safeUrl = JSON.stringify(url).slice(1, -1);
 
+        // Map HTTP methods to k6 http functions
+        const methodMap: { [key: string]: string } = {
+          'GET': 'get',
+          'POST': 'post',
+          'PUT': 'put',
+          'DELETE': 'del'
+        };
+        const k6Method = methodMap[upperMethod];
+
         const script = `import http from 'k6/http';
 import { check, sleep } from 'k6';
 
@@ -412,7 +424,7 @@ export const options = {
 };
 
 export default function () {
-  const response = http.${upperMethod.toLowerCase()}('${safeUrl}');
+  const response = http.${k6Method}('${safeUrl}');
   
   check(response, {
     'status is 200': (r) => r.status === 200,
