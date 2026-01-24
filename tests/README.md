@@ -4,7 +4,18 @@ This directory contains example k6 test scripts to help you get started with per
 
 ## Available Examples
 
-### 1. basic-load-test.js
+
+## Test Types & Structure
+
+The examples are now organized by test type:
+
+- **API Tests:** `examples/api/api-test.js`
+- **Load Tests:** `examples/load/basic-load-test.js`
+- **Ramping Tests:** `examples/ramping/ramping-vus-test.js`
+- **Spike Tests:** `examples/spike/spike-test.js`
+
+### 1. Basic Load Test
+Path: `examples/load/basic-load-test.js`
 A simple load test that demonstrates:
 - Basic HTTP GET request
 - Response validation with checks
@@ -13,10 +24,11 @@ A simple load test that demonstrates:
 
 **Usage:**
 ```bash
-k6 run examples/basic-load-test.js
+k6 run examples/load/basic-load-test.js
 ```
 
-### 2. ramping-vus-test.js
+### 2. Ramping VUs Test
+Path: `examples/ramping/ramping-vus-test.js`
 A ramping load test that demonstrates:
 - Gradual increase and decrease of virtual users (VUs)
 - Grouped scenarios
@@ -25,10 +37,11 @@ A ramping load test that demonstrates:
 
 **Usage:**
 ```bash
-k6 run examples/ramping-vus-test.js
+k6 run examples/ramping/ramping-vus-test.js
 ```
 
-### 3. api-test.js
+### 3. API Test
+Path: `examples/api/api-test.js`
 An API testing script that demonstrates:
 - Multiple HTTP methods (GET, POST, PUT, DELETE)
 - JSON payload handling
@@ -38,10 +51,11 @@ An API testing script that demonstrates:
 
 **Usage:**
 ```bash
-k6 run examples/api-test.js
+k6 run examples/api/api-test.js
 ```
 
-### 4. spike-test.js
+### 4. Spike Test
+Path: `examples/spike/spike-test.js`
 A spike test that demonstrates:
 - Sudden traffic increases
 - System behavior under stress
@@ -50,7 +64,7 @@ A spike test that demonstrates:
 
 **Usage:**
 ```bash
-k6 run examples/spike-test.js
+k6 run examples/spike/spike-test.js
 ```
 
 ## Using Examples with MCP Server

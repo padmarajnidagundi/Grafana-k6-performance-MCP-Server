@@ -1,6 +1,11 @@
 
 # Grafana k6 Performance MCP Server
 
+![Build Status](https://img.shields.io/github/actions/workflow/status/your-org/Grafana-k6-performance-MCP-Server/ci.yml?branch=main)
+![npm version](https://img.shields.io/npm/v/grafana-k6-performance-mcp-server)
+![License](https://img.shields.io/github/license/your-org/Grafana-k6-performance-MCP-Server)
+![k6](https://img.shields.io/badge/k6-tested-brightgreen)
+
 ## High-Performance Load Testing Automation for Modern APIs
 
 **Grafana k6 Performance MCP Server** is a robust, extensible Model Context Protocol (MCP) server designed to automate, manage, and analyze [Grafana k6](https://k6.io/) performance tests. Built for developers, QA engineers, and DevOps teams, this tool enables seamless integration of k6 load testing into your CI/CD pipelines, AI assistants, and MCP-compatible clients. Achieve reliable, scalable, and repeatable performance testing for APIs and web services.
@@ -29,8 +34,32 @@
   ```bash
   node build/index.js
   ```
+
 4. **Create and run your first test:**
   Use the provided tools or see [examples/](examples/) for ready-to-use scripts.
+
+
+## Types of Performance Tests
+
+The project provides several types of k6 test scripts, each targeting a specific performance scenario:
+
+- **API Test:**
+  - Location: `examples/api/api-test.js`
+  - Purpose: Validates API endpoints using multiple HTTP methods (GET, POST, PUT, DELETE), checks payloads, headers, and endpoint-specific thresholds.
+
+- **Load Test:**
+  - Location: `examples/load/basic-load-test.js`
+  - Purpose: Simulates a steady number of users to measure baseline performance and response times under typical load.
+
+- **Ramping Test:**
+  - Location: `examples/ramping/ramping-vus-test.js`
+  - Purpose: Gradually increases and decreases the number of virtual users to observe system behavior during scaling and descaling events.
+
+- **Spike Test:**
+  - Location: `examples/spike/spike-test.js`
+  - Purpose: Applies sudden, extreme load to test system resilience, error rates, and recovery from traffic spikes.
+
+See the [examples/README.md](examples/README.md) for details and usage instructions for each test type.
 
 
 
