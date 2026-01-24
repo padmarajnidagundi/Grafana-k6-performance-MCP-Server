@@ -253,7 +253,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         };
         
         // Remove .js extension properly (only from the end)
-        const testNameWithoutExt = testFile.endsWith('.js') ? testFile.slice(0, -3) : testFile;
+        const testNameWithoutExt = testFile.replace(/\.js$/, '');
         const resultFileName = `${testNameWithoutExt}-${Date.now()}.json`;
         const resultPath = join(K6_RESULTS_DIR, resultFileName);
         await writeFile(resultPath, JSON.stringify(resultData, null, 2), 'utf-8');
@@ -313,7 +313,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         let filteredFiles = resultFiles;
         if (testName) {
           // Remove .js extension properly (only from the end)
-          const searchName = testName.endsWith('.js') ? testName.slice(0, -3) : testName;
+          const searchName = testName.replace(/\.js$/, '');
           filteredFiles = resultFiles.filter(f => f.startsWith(searchName));
         }
 
@@ -396,9 +396,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           );
         }
 
-        // Escape special characters for JavaScript string
-        const escapeJsString = (str: string) => str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
-        const escapedUrl = escapeJsString(url);
+        // Use JSON.stringify for safe string escaping (removes quotes)
+        const safeUrl = JSON.stringify(url).slice(1, -1);
 
         const script = `import http from 'k6/http';
 import { check, sleep } from 'k6';
@@ -413,7 +412,7 @@ export const options = {
 };
 
 export default function () {
-  const response = http.${upperMethod.toLowerCase()}('${escapedUrl}');
+  const response = http.${upperMethod.toLowerCase()}('${safeUrl}');
   
   check(response, {
     'status is 200': (r) => r.status === 200,
