@@ -319,8 +319,53 @@ Contributions are welcome! Please feel free to submit a Pull Request or open an 
 
 ---
 
+
+---
+
+## Code of Conduct
+
+We are committed to providing a welcoming and inclusive environment. Please adhere to our Code of Conduct in all interactions.
+
+**Zero tolerance for:**
+
+- Harassment or discriminatory language
+- Trolling or insulting comments
+- Spam or off-topic discussions
+
+---
+
+## Recognition
+
+All contributors will be:
+
+✅ Listed in CONTRIBUTORS.md (coming soon)
+✅ Mentioned in release notes for significant contributions
+✅ Given credit in documentation where applicable
+
+---
+
+## Questions?
+
+If you have any questions:
+
+💬 Open a GitHub Discussion  
+🐛 Report bugs via GitHub Issues  
+📧 Email: padmaraj.nidagundi@gmail.com  
+_Response time: Typically 24-48 hours_
+
+---
+
+## First-Time Contributors Welcome! 👋
+
+New to open source? No problem! Look for issues tagged with `good-first-issue` or `help-wanted`. We provide mentorship and guidance to help you succeed.
+
+Thank you for making test automation better for everyone! 🚀
+
+---
+
 ## Author & Maintainer
 
 **Project Lead:** [Your Name or Organization]
 
 For questions, support, or partnership inquiries, please open an issue or contact the maintainer.
+
