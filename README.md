@@ -1,22 +1,61 @@
+
 # Grafana k6 Performance MCP Server
 
-A Model Context Protocol (MCP) server that provides tools for creating, running, and managing [Grafana k6](https://k6.io/) performance tests. This server enables AI assistants and other MCP clients to interact with k6 for load testing and performance analysis.
+## High-Performance Load Testing Automation for Modern APIs
 
-## Features
+**Grafana k6 Performance MCP Server** is a robust, extensible Model Context Protocol (MCP) server designed to automate, manage, and analyze [Grafana k6](https://k6.io/) performance tests. Built for developers, QA engineers, and DevOps teams, this tool enables seamless integration of k6 load testing into your CI/CD pipelines, AI assistants, and MCP-compatible clients. Achieve reliable, scalable, and repeatable performance testing for APIs and web services.
 
-- 🚀 **Create k6 Tests**: Generate custom k6 performance test scripts
-- ▶️ **Run Tests**: Execute k6 tests with configurable parameters (VUs, duration, iterations)
-- 📊 **View Results**: Access test execution results and metrics
-- 📝 **List Tests**: See all available k6 test scripts
-- 🔧 **Generate Load Tests**: Quick generation of common load test patterns
-- 📦 **Resources**: Access test scripts and results as MCP resources
+---
+
+## Why Choose This Project?
+
+- **Expert-Driven**: Built with best practices in performance engineering and automation.
+- **Authoritative**: Integrates directly with industry-standard [Grafana k6](https://k6.io/) for trusted results.
+- **Trustworthy**: Open source, transparent, and maintained by experienced contributors.
+- **SEO Keywords**: k6 load testing, API performance, automated performance testing, MCP server, DevOps, CI/CD, scalable load testing, open source.
+
+---
+
+## Quick Start
+
+1. **Install dependencies:**
+  ```bash
+  npm install
+  npm run build
+  ```
+2. **Install k6:**
+  - [k6 Installation Guide](https://k6.io/docs/get-started/installation/)
+3. **Run the server:**
+  ```bash
+  node build/index.js
+  ```
+4. **Create and run your first test:**
+  Use the provided tools or see [examples/](examples/) for ready-to-use scripts.
+
+---
+
+
+## Key Features
+
+- 🚀 **Create k6 Tests**: Generate custom, reusable k6 performance test scripts for any API or web service.
+- ▶️ **Run Tests**: Execute k6 load tests with configurable parameters (virtual users, duration, iterations) for flexible benchmarking.
+- 📊 **View Results**: Instantly access detailed test execution results and performance metrics.
+- 📝 **List Tests**: Organize and manage all available k6 test scripts in one place.
+- 🔧 **Generate Load Tests**: Quickly generate common load test patterns for rapid prototyping.
+- 📦 **Resource Management**: Access test scripts and results as MCP resources for easy integration.
+
+---
+
 
 ## Prerequisites
 
-- Node.js 18 or higher
-- [k6](https://k6.io/docs/get-started/installation/) installed and available in PATH
+- **Node.js 18+**
+- **[k6](https://k6.io/docs/get-started/installation/)** (must be installed and available in your system PATH)
 
-### Installing k6
+---
+
+
+### How to Install k6
 
 **macOS:**
 ```bash
@@ -39,23 +78,31 @@ choco install k6
 
 Or download from [k6 releases](https://github.com/grafana/k6/releases).
 
-## Installation
+
+## Installation & Setup
 
 ```bash
 npm install
 npm run build
 ```
 
+---
+
+
 ## Configuration
 
-The server uses the following environment variables (optional):
+You can customize storage locations using environment variables:
 
 - `K6_TESTS_DIR`: Directory for storing k6 test scripts (default: `./k6-tests`)
 - `K6_RESULTS_DIR`: Directory for storing test results (default: `./k6-results`)
 
-## Usage with MCP Clients
+---
 
-### Claude Desktop
+
+## Usage with MCP Clients & Integrations
+
+
+### Claude Desktop Integration
 
 Add to your Claude Desktop configuration file:
 
@@ -78,7 +125,8 @@ Add to your Claude Desktop configuration file:
 }
 ```
 
-### Other MCP Clients
+
+### Other MCP-Compatible Clients
 
 Run the server using stdio transport:
 
@@ -86,7 +134,8 @@ Run the server using stdio transport:
 node build/index.js
 ```
 
-## Available Tools
+
+## Available Tools & API
 
 ### 1. create_k6_test
 
@@ -165,14 +214,18 @@ Generate a k6 load test script with common patterns.
 }
 ```
 
-## Resources
 
-The server exposes k6 test scripts and results as MCP resources:
+## Resources & Data Access
 
-- **Test Scripts**: `k6://tests/{filename}` - Access k6 test script content
-- **Test Results**: `k6://results/{filename}` - Access test execution results
+The server exposes k6 test scripts and results as MCP resources for easy programmatic access:
 
-## Example k6 Test Script
+- **Test Scripts**: `k6://tests/{filename}` — Access k6 test script content
+- **Test Results**: `k6://results/{filename}` — Access test execution results
+
+---
+
+
+## Example: k6 Load Test Script
 
 ```javascript
 import http from 'k6/http';
@@ -199,7 +252,10 @@ export default function () {
 }
 ```
 
-## Development
+
+---
+
+## Development & Contribution
 
 ### Build
 ```bash
@@ -211,7 +267,8 @@ npm run build
 npm run watch
 ```
 
-## Use Cases
+
+## Use Cases & Benefits
 
 - **API Performance Testing**: Test REST APIs under various load conditions
 - **Load Testing**: Simulate multiple concurrent users
@@ -220,7 +277,10 @@ npm run watch
 - **Endurance Testing**: Verify system stability over extended periods
 - **Performance Regression Testing**: Ensure new changes don't degrade performance
 
-## Troubleshooting
+
+---
+
+## Troubleshooting & Support
 
 ### k6 not found
 Ensure k6 is installed and available in your PATH:
@@ -234,16 +294,33 @@ Ensure the k6 tests and results directories are writable:
 chmod -R 755 k6-tests k6-results
 ```
 
+
+---
+
 ## License
 
-MIT
+This project is licensed under the MIT License.
 
-## Resources
+---
+
+
+## Further Reading & Resources
 
 - [k6 Documentation](https://k6.io/docs/)
 - [MCP Documentation](https://modelcontextprotocol.io/)
 - [k6 Examples](https://k6.io/docs/examples/)
 
+---
+
+
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a Pull Request or open an issue for feature requests and bug reports.
+
+---
+
+## Author & Maintainer
+
+**Project Lead:** [Your Name or Organization]
+
+For questions, support, or partnership inquiries, please open an issue or contact the maintainer.
