@@ -5,7 +5,7 @@
 
 **Grafana k6 Performance MCP Server** is a robust, extensible Model Context Protocol (MCP) server designed to automate, manage, and analyze [Grafana k6](https://k6.io/) performance tests. Built for developers, QA engineers, and DevOps teams, this tool enables seamless integration of k6 load testing into your CI/CD pipelines, AI assistants, and MCP-compatible clients. Achieve reliable, scalable, and repeatable performance testing for APIs and web services.
 
----
+
 
 ## Why Choose This Project?
 
@@ -14,7 +14,7 @@
 - **Trustworthy**: Open source, transparent, and maintained by experienced contributors.
 - **SEO Keywords**: k6 load testing, API performance, automated performance testing, MCP server, DevOps, CI/CD, scalable load testing, open source.
 
----
+
 
 ## Quick Start
 
@@ -32,19 +32,19 @@
 4. **Create and run your first test:**
   Use the provided tools or see [examples/](examples/) for ready-to-use scripts.
 
----
+
 
 
 ## Key Features
 
-- 🚀 **Create k6 Tests**: Generate custom, reusable k6 performance test scripts for any API or web service.
-- ▶️ **Run Tests**: Execute k6 load tests with configurable parameters (virtual users, duration, iterations) for flexible benchmarking.
-- 📊 **View Results**: Instantly access detailed test execution results and performance metrics.
-- 📝 **List Tests**: Organize and manage all available k6 test scripts in one place.
-- 🔧 **Generate Load Tests**: Quickly generate common load test patterns for rapid prototyping.
-- 📦 **Resource Management**: Access test scripts and results as MCP resources for easy integration.
+-  **Create k6 Tests**: Generate custom, reusable k6 performance test scripts for any API or web service.
+-  **Run Tests**: Execute k6 load tests with configurable parameters (virtual users, duration, iterations) for flexible benchmarking.
+-  **View Results**: Instantly access detailed test execution results and performance metrics.
+-  **List Tests**: Organize and manage all available k6 test scripts in one place.
+-  **Generate Load Tests**: Quickly generate common load test patterns for rapid prototyping.
+- **Resource Management**: Access test scripts and results as MCP resources for easy integration.
 
----
+
 
 
 ## Prerequisites
@@ -52,7 +52,7 @@
 - **Node.js 18+**
 - **[k6](https://k6.io/docs/get-started/installation/)** (must be installed and available in your system PATH)
 
----
+
 
 
 ### How to Install k6
@@ -86,7 +86,7 @@ npm install
 npm run build
 ```
 
----
+
 
 
 ## Configuration
@@ -96,7 +96,7 @@ You can customize storage locations using environment variables:
 - `K6_TESTS_DIR`: Directory for storing k6 test scripts (default: `./k6-tests`)
 - `K6_RESULTS_DIR`: Directory for storing test results (default: `./k6-results`)
 
----
+
 
 
 ## Usage with MCP Clients & Integrations
@@ -222,7 +222,6 @@ The server exposes k6 test scripts and results as MCP resources for easy program
 - **Test Scripts**: `k6://tests/{filename}` — Access k6 test script content
 - **Test Results**: `k6://results/{filename}` — Access test execution results
 
----
 
 
 ## Example: k6 Load Test Script
@@ -253,7 +252,7 @@ export default function () {
 ```
 
 
----
+
 
 ## Development & Contribution
 
@@ -278,7 +277,7 @@ npm run watch
 - **Performance Regression Testing**: Ensure new changes don't degrade performance
 
 
----
+
 
 ## Troubleshooting & Support
 
@@ -295,13 +294,13 @@ chmod -R 755 k6-tests k6-results
 ```
 
 
----
+
 
 ## License
 
 This project is licensed under the MIT License.
 
----
+
 
 
 ## Further Reading & Resources
@@ -310,17 +309,17 @@ This project is licensed under the MIT License.
 - [MCP Documentation](https://modelcontextprotocol.io/)
 - [k6 Examples](https://k6.io/docs/examples/)
 
----
+
 
 
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request or open an issue for feature requests and bug reports.
 
----
 
 
----
+
+
 
 ## Code of Conduct
 
@@ -332,7 +331,7 @@ We are committed to providing a welcoming and inclusive environment. Please adhe
 - Trolling or insulting comments
 - Spam or off-topic discussions
 
----
+
 
 ## Recognition
 
@@ -342,7 +341,7 @@ All contributors will be:
 ✅ Mentioned in release notes for significant contributions
 ✅ Given credit in documentation where applicable
 
----
+
 
 ## Questions?
 
@@ -353,7 +352,7 @@ If you have any questions:
 📧 Email: padmaraj.nidagundi@gmail.com  
 _Response time: Typically 24-48 hours_
 
----
+
 
 ## First-Time Contributors Welcome! 👋
 
@@ -361,7 +360,7 @@ New to open source? No problem! Look for issues tagged with `good-first-issue` o
 
 Thank you for making test automation better for everyone! 🚀
 
----
+
 
 ## Author & Maintainer
 
