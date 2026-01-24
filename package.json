@@ -1,0 +1,36 @@
+{
+  "name": "grafana-k6-performance-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP Server for Grafana k6 performance testing",
+  "main": "build/index.js",
+  "type": "module",
+  "bin": {
+    "grafana-k6-mcp-server": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "watch": "tsc --watch",
+    "start": "node build/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "grafana",
+    "k6",
+    "performance",
+    "testing",
+    "load-testing"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
