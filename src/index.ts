@@ -252,7 +252,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           output: result.stdout + result.stderr
         };
         
-        const resultFileName = `${testFile.replace('.js', '')}-${Date.now()}.json`;
+        // Remove .js extension properly (only from the end)
+        const testNameWithoutExt = testFile.endsWith('.js') ? testFile.slice(0, -3) : testFile;
+        const resultFileName = `${testNameWithoutExt}-${Date.now()}.json`;
         const resultPath = join(K6_RESULTS_DIR, resultFileName);
         await writeFile(resultPath, JSON.stringify(resultData, null, 2), 'utf-8');
 
@@ -310,7 +312,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         
         let filteredFiles = resultFiles;
         if (testName) {
-          const searchName = testName.replace('.js', '');
+          // Remove .js extension properly (only from the end)
+          const searchName = testName.endsWith('.js') ? testName.slice(0, -3) : testName;
           filteredFiles = resultFiles.filter(f => f.startsWith(searchName));
         }
 
@@ -357,6 +360,46 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           duration?: string;
         };
 
+        // Validate method
+        const validMethods = ['GET', 'POST', 'PUT', 'DELETE'];
+        const upperMethod = method.toUpperCase();
+        if (!validMethods.includes(upperMethod)) {
+          throw new McpError(
+            ErrorCode.InvalidRequest,
+            `Invalid HTTP method: ${method}. Must be one of: ${validMethods.join(', ')}`
+          );
+        }
+
+        // Validate VUs and duration
+        if (typeof vus !== 'number' || vus < 1 || vus > 10000) {
+          throw new McpError(
+            ErrorCode.InvalidRequest,
+            'VUs must be a number between 1 and 10000'
+          );
+        }
+
+        // Validate duration format (e.g., "30s", "5m", "1h")
+        if (!/^\d+[smh]$/.test(duration)) {
+          throw new McpError(
+            ErrorCode.InvalidRequest,
+            'Duration must be in format like "30s", "5m", or "1h"'
+          );
+        }
+
+        // Validate URL format
+        try {
+          new URL(url);
+        } catch {
+          throw new McpError(
+            ErrorCode.InvalidRequest,
+            'Invalid URL format'
+          );
+        }
+
+        // Escape special characters for JavaScript string
+        const escapeJsString = (str: string) => str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
+        const escapedUrl = escapeJsString(url);
+
         const script = `import http from 'k6/http';
 import { check, sleep } from 'k6';
 
@@ -370,7 +413,7 @@ export const options = {
 };
 
 export default function () {
-  const response = http.${method.toLowerCase()}('${url}');
+  const response = http.${upperMethod.toLowerCase()}('${escapedUrl}');
   
   check(response, {
     'status is 200': (r) => r.status === 200,
@@ -390,7 +433,7 @@ export default function () {
           content: [
             {
               type: 'text',
-              text: `Successfully generated k6 load test: ${fileName}\n\nConfiguration:\n- URL: ${url}\n- Method: ${method}\n- VUs: ${vus}\n- Duration: ${duration}\n\nYou can now run it using run_k6_test with testFile: "${fileName}"`
+              text: `Successfully generated k6 load test: ${fileName}\n\nConfiguration:\n- URL: ${url}\n- Method: ${upperMethod}\n- VUs: ${vus}\n- Duration: ${duration}\n\nYou can now run it using run_k6_test with testFile: "${fileName}"`
             }
           ]
         };
