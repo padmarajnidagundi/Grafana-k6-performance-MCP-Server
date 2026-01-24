@@ -79,16 +79,46 @@ The project provides several types of k6 test scripts, each targeting a specific
 
 See the [examples/README.md](examples/README.md) for details and usage instructions for each test type.
 
-## Additional Example Folders
 
-The following folders are provided for organizing and extending your own examples:
+## Using the AI Folder
 
-- **chatmodes/**: Add or explore example scripts for different chat or conversational modes.
-- **skills/**: Store reusable skill modules or scripts that can be shared across tests or agents.
-- **agent/**: Example agent logic, orchestration, or agent-based test scenarios.
-- **MCP/**: Examples and templates for Model Context Protocol (MCP) integrations, resources, or workflows.
+The `AI/` directory contains modular components for building intelligent agents, chat modes, and skills that can be integrated with your MCP server or other Node.js projects.
 
-You can place your own scripts or templates in these folders to extend the server's capabilities or demonstrate integrations.
+**Structure:**
+
+- `AI/agent/`: Example agent logic and orchestration scripts
+- `AI/chatmodes/`: Chat mode configurations and conversational logic
+- `AI/skills/`: Reusable skill modules (e.g., HTTP requests)
+- `AI/MCP/`: Model Context Protocol resource templates and integration examples
+
+**How to Use:**
+
+1. **Import a skill or chat mode in your agent:**
+
+   ```js
+   // Import a skill and a chat mode
+   import { getRequest } from './AI/skills/http-skill.js';
+   import chatMode from './AI/chatmodes/simple-chatmode.js';
+
+   // Use in your agent logic
+   export default function agent(context) {
+     if (context.input.startsWith('fetch')) {
+       const url = context.input.split(' ')[1];
+       const res = getRequest(url);
+       return `Fetched ${url}: Status ${res.status}`;
+     }
+     return chatMode(context);
+   }
+   ```
+
+2. **Customize or extend:**
+   - Add new skills to `AI/skills/` (e.g., math, database, etc.)
+   - Create new chat modes in `AI/chatmodes/`
+   - Build more advanced agents in `AI/agent/`
+
+3. **Integrate with your MCP server or other Node.js apps** by importing and composing these modules as needed.
+
+See the `AI/README.md` and subfolder READMEs for more details and templates.
 
 
 
