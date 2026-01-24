@@ -21,7 +21,26 @@
 
 
 
-## Quick Start
+
+## Repository Structure
+
+```
+├── AI/                  # Modular AI components (agents, chatmodes, skills, MCP resources)
+│   ├── agent/
+│   ├── chatmodes/
+│   ├── skills/
+│   └── MCP/
+├── examples/            # k6 test scripts and templates (api, load, ramping, spike, etc.)
+├── src/                 # Main server source code
+├── install.sh           # One-click install script (Linux/macOS)
+├── install.ps1          # One-click install script (Windows)
+├── package.json         # Project metadata and dependencies
+├── tsconfig.json        # TypeScript configuration
+├── README.md            # Project documentation
+├── LICENSE              # License file
+└── ...                  # Other configs, docs, and assets
+```
+
 
 
 ### 🚀 One-Click Installation
