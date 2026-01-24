@@ -23,20 +23,38 @@
 
 ## Quick Start
 
-1. **Install dependencies:**
+
+### 🚀 One-Click Installation
+
+For most users, just run the provided script for your OS:
+
+- **Linux/macOS:**
   ```bash
-  npm install
-  npm run build
+  bash install.sh
   ```
-2. **Install k6:**
-  - [k6 Installation Guide](https://k6.io/docs/get-started/installation/)
-3. **Run the server:**
-  ```bash
-  node build/index.js
+- **Windows:**
+  ```powershell
+  ./install.ps1
   ```
 
+This will install dependencies, build the project, and install k6 if needed.
+
+---
+
+**Manual steps:**
+1. **Install dependencies:**
+    ```bash
+    npm install
+    npm run build
+    ```
+2. **Install k6:**
+    - [k6 Installation Guide](https://k6.io/docs/get-started/installation/)
+3. **Run the server:**
+    ```bash
+    node build/index.js
+    ```
 4. **Create and run your first test:**
-  Use the provided tools or see [examples/](examples/) for ready-to-use scripts.
+    Use the provided tools or see [examples/](examples/) for ready-to-use scripts.
 
 
 ## Types of Performance Tests
@@ -60,6 +78,17 @@ The project provides several types of k6 test scripts, each targeting a specific
   - Purpose: Applies sudden, extreme load to test system resilience, error rates, and recovery from traffic spikes.
 
 See the [examples/README.md](examples/README.md) for details and usage instructions for each test type.
+
+## Additional Example Folders
+
+The following folders are provided for organizing and extending your own examples:
+
+- **chatmodes/**: Add or explore example scripts for different chat or conversational modes.
+- **skills/**: Store reusable skill modules or scripts that can be shared across tests or agents.
+- **agent/**: Example agent logic, orchestration, or agent-based test scenarios.
+- **MCP/**: Examples and templates for Model Context Protocol (MCP) integrations, resources, or workflows.
+
+You can place your own scripts or templates in these folders to extend the server's capabilities or demonstrate integrations.
 
 
 

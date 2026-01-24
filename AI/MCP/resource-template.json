@@ -1,0 +1,7 @@
+{
+  "@type": "MCPResource",
+  "name": "Sample Resource",
+  "description": "This is a sample MCP resource template for integration.",
+  "endpoint": "https://api.example.com/resource",
+  "methods": ["GET", "POST"]
+}
