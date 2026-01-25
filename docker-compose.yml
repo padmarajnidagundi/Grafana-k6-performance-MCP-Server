@@ -1,0 +1,101 @@
+version: '3.8'
+
+services:
+  # Grafana k6 Performance MCP Server
+  k6-mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: grafana-k6-mcp-server
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - K6_TESTS_DIR=/app/k6-tests
+      - K6_RESULTS_DIR=/app/k6-results
+      # Optional: Grafana Cloud configuration
+      # - K6_CLOUD_TOKEN=${K6_CLOUD_TOKEN}
+      # - K6_CLOUD_PROJECT_ID=${K6_CLOUD_PROJECT_ID}
+    volumes:
+      # Mount local test directory
+      - ./k6-tests:/app/k6-tests
+      # Mount results directory for persistence
+      - ./k6-results:/app/k6-results
+      # Optional: Mount custom tests from host
+      - ./tests:/app/tests:ro
+    networks:
+      - k6-network
+    # Stdin/stdout for MCP communication
+    stdin_open: true
+    tty: true
+    command: node build/index.js
+
+  # Optional: InfluxDB for storing k6 metrics
+  influxdb:
+    image: influxdb:2.7-alpine
+    container_name: k6-influxdb
+    restart: unless-stopped
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=adminpassword
+      - DOCKER_INFLUXDB_INIT_ORG=k6org
+      - DOCKER_INFLUXDB_INIT_BUCKET=k6
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=my-super-secret-auth-token
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+      - influxdb-config:/etc/influxdb2
+    networks:
+      - k6-network
+    profiles:
+      - monitoring
+
+  # Optional: Grafana for visualizing k6 results
+  grafana:
+    image: grafana/grafana:10.2.3
+    container_name: k6-grafana
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=grafana-k6-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./docker/grafana/provisioning:/etc/grafana/provisioning
+    depends_on:
+      - influxdb
+    networks:
+      - k6-network
+    profiles:
+      - monitoring
+
+  # Optional: Prometheus for metrics collection
+  prometheus:
+    image: prom/prometheus:v2.48.1
+    container_name: k6-prometheus
+    restart: unless-stopped
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    networks:
+      - k6-network
+    profiles:
+      - monitoring
+
+networks:
+  k6-network:
+    driver: bridge
+
+volumes:
+  influxdb-data:
+  influxdb-config:
+  grafana-data:
+  prometheus-data:

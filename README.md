@@ -1,23 +1,31 @@
 
 # Grafana k6 Performance MCP Server
 
-![Build Status](https://img.shields.io/github/actions/workflow/status/your-org/Grafana-k6-performance-MCP-Server/ci.yml?branch=main)
-![npm version](https://img.shields.io/npm/v/grafana-k6-performance-mcp-server)
-![License](https://img.shields.io/github/license/your-org/Grafana-k6-performance-MCP-Server)
-![k6](https://img.shields.io/badge/k6-tested-brightgreen)
+[![CI](https://github.com/padmarajnidagundi/Grafana-k6-performance-MCP-Server/workflows/CI/badge.svg)](https://github.com/padmarajnidagundi/Grafana-k6-performance-MCP-Server/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
+[![k6](https://img.shields.io/badge/k6-v0.49-7D64FF?logo=k6&logoColor=white)](https://k6.io/)
+[![MCP](https://img.shields.io/badge/MCP-v1.25.3-blue)](https://modelcontextprotocol.io/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-## High-Performance Load Testing Automation for Modern APIs
+> 🤖 **First AI-Native Performance Testing MCP Server** — Integrate k6 load testing with Claude, ChatGPT, and other AI assistants
 
-**Grafana k6 Performance MCP Server** is a robust, extensible Model Context Protocol (MCP) server designed to automate, manage, and analyze [Grafana k6](https://k6.io/) performance tests. Built for developers, QA engineers, and DevOps teams, this tool enables seamless integration of k6 load testing into your CI/CD pipelines, AI assistants, and MCP-compatible clients. Achieve reliable, scalable, and repeatable performance testing for APIs and web services.
+## 🚀 AI-Powered Load Testing for Modern APIs
 
+**Transform natural language into production-ready performance tests.** The Grafana k6 Performance MCP Server is the first AI-native Model Context Protocol (MCP) server for [Grafana k6](https://k6.io/) load testing. Built for the AI era, it enables developers, QA engineers, and DevOps teams to create, execute, and analyze performance tests through conversational AI interfaces.
 
+### ✨ **What Makes This Special?**
 
-## Why Choose This Project?
-
-- **Expert-Driven**: Built with best practices in performance engineering and automation.
-- **Authoritative**: Integrates directly with industry-standard [Grafana k6](https://k6.io/) for trusted results.
-- **Trustworthy**: Open source, transparent, and maintained by experienced contributors.
-- **SEO Keywords**: k6 load testing, API performance, automated performance testing, MCP server, DevOps, CI/CD, scalable load testing, open source.
+- 🤖 **AI-First Design**: Natural language → k6 test scripts in seconds
+- 🔌 **MCP Native**: Seamless integration with Claude Desktop, Cline, and other MCP clients
+- 🎯 **Production-Ready**: Comprehensive test templates for REST, GraphQL, WebSocket, and gRPC
+- 🐳 **Docker Ready**: Full containerization with monitoring stack (Grafana, InfluxDB, Prometheus)
+- 🚦 **CI/CD Native**: GitHub Actions workflows included for automated testing
+- 📊 **Advanced Prompts**: Pre-built conversational workflows for common testing scenarios
+- 🔧 **Extensible**: Modular AI skills, agents, and chat modes
+- 🌐 **Multi-Protocol**: REST, GraphQL, WebSocket, gRPC support out-of-the-box
 
 
 
@@ -60,6 +68,31 @@ This will install dependencies, build the project, and install k6 if needed.
 
 ---
 
+### 🐳 Docker Installation (Recommended for Production)
+
+Run with Docker for isolated, reproducible environments:
+
+```bash
+# Build and run
+docker-compose up -d
+
+# Run with monitoring stack (Grafana + InfluxDB + Prometheus)
+docker-compose --profile monitoring up -d
+
+# View logs
+docker-compose logs -f k6-mcp-server
+
+# Stop services
+docker-compose down
+```
+
+**Access monitoring dashboards:**
+- Grafana: http://localhost:3000 (admin/admin)
+- InfluxDB: http://localhost:8086
+- Prometheus: http://localhost:9090
+
+---
+
 **Manual steps:**
 1. **Install dependencies:**
     ```bash
@@ -73,30 +106,48 @@ This will install dependencies, build the project, and install k6 if needed.
     node build/index.js
     ```
 4. **Create and run your first test:**
-    Use the provided tools or see [examples/](examples/) for ready-to-use scripts.
+    Use the provided tools or see [tests/](tests/) for ready-to-use scripts.
 
 
-## Types of Performance Tests
+## 📚 Comprehensive Test Examples
 
-The project provides several types of k6 test scripts, each targeting a specific performance scenario:
+The project provides production-ready k6 test scripts for modern API architectures:
 
-- **API Test:**
-  - Location: `examples/api/api-test.js`
-  - Purpose: Validates API endpoints using multiple HTTP methods (GET, POST, PUT, DELETE), checks payloads, headers, and endpoint-specific thresholds.
+### REST API Testing
+- **API Test**: [tests/api/api-test.js](tests/api/api-test.js)
+  - Multi-method testing (GET, POST, PUT, DELETE)
+  - Request validation and threshold checks
+  - Authentication handling
 
-- **Load Test:**
-  - Location: `examples/load/basic-load-test.js`
-  - Purpose: Simulates a steady number of users to measure baseline performance and response times under typical load.
+- **Load Test**: [tests/load/basic-load-test.js](tests/load/basic-load-test.js)
+  - Baseline performance measurement
+  - Steady-state load simulation
 
-- **Ramping Test:**
-  - Location: `examples/ramping/ramping-vus-test.js`
-  - Purpose: Gradually increases and decreases the number of virtual users to observe system behavior during scaling and descaling events.
+- **Ramping Test**: [tests/ramping/ramping-vus-test.js](tests/ramping/ramping-vus-test.js)
+  - Gradual load increase/decrease
+  - Scaling behavior analysis
 
-- **Spike Test:**
-  - Location: `examples/spike/spike-test.js`
-  - Purpose: Applies sudden, extreme load to test system resilience, error rates, and recovery from traffic spikes.
+- **Spike Test**: [tests/spike/spike-test.js](tests/spike/spike-test.js)
+  - Sudden traffic surge testing
+  - System resilience validation
 
-See the [examples/README.md](examples/README.md) for details and usage instructions for each test type.
+### Modern API Protocols
+- **GraphQL Test**: [tests/graphql/graphql-test.js](tests/graphql/graphql-test.js)
+  - Query and mutation testing
+  - Variable handling and fragments
+  - Error scenario validation
+
+- **WebSocket Test**: [tests/websocket/websocket-test.js](tests/websocket/websocket-test.js)
+  - Connection lifecycle testing
+  - Real-time message latency
+  - Chat/streaming simulation
+
+- **gRPC Test**: [tests/grpc/grpc-test.js](tests/grpc/grpc-test.js)
+  - Unary and streaming RPC
+  - Protocol buffer handling
+  - Performance comparison with REST
+
+See individual test files for detailed usage instructions and best practices.
 
 
 ## Using the AI Folder
@@ -137,7 +188,23 @@ The `AI/` directory contains modular components for building intelligent agents,
 
 3. **Integrate with your MCP server or other Node.js apps** by importing and composing these modules as needed.
 
-See the `AI/README.md` and subfolder READMEs for more details and templates.
+See the [AI/README.md](AI/README.md) and subfolder READMEs for more details and templates.
+
+### 🎯 MCP Prompts for Guided Workflows
+
+The [AI/MCP/prompts.md](AI/MCP/prompts.md) file contains pre-built conversational workflows:
+
+- **create_api_load_test**: Guided API test creation with best practices
+- **analyze_performance_results**: AI-powered result analysis and recommendations
+- **setup_spike_test**: Black Friday / traffic surge test configuration
+- **optimize_existing_test**: Automatic test script improvements
+- **setup_ci_cd_integration**: Generate CI/CD pipeline configurations
+- **compare_test_runs**: Trend analysis across multiple test runs
+- **generate_realistic_scenarios**: User journey and persona simulation
+- **debug_failed_test**: Intelligent troubleshooting assistance
+- **capacity_planning**: Determine scaling requirements
+
+These prompts enable AI assistants to provide structured, expert guidance for complex testing scenarios.
 
 
 
