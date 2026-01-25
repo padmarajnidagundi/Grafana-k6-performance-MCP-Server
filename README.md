@@ -10,22 +10,22 @@
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-> 🤖 **First AI-Native Performance Testing MCP Server** — Integrate k6 load testing with Claude, ChatGPT, and other AI assistants
+> **First AI-Native Performance Testing MCP Server** — Integrate k6 load testing with Claude, ChatGPT, and other AI assistants
 
-## 🚀 AI-Powered Load Testing for Modern APIs
+##  AI-Powered Load Testing for Modern APIs
 
 **Transform natural language into production-ready performance tests.** The Grafana k6 Performance MCP Server is the first AI-native Model Context Protocol (MCP) server for [Grafana k6](https://k6.io/) load testing. Built for the AI era, it enables developers, QA engineers, and DevOps teams to create, execute, and analyze performance tests through conversational AI interfaces.
 
-### ✨ **What Makes This Special?**
+###  **What Makes This Special?**
 
-- 🤖 **AI-First Design**: Natural language → k6 test scripts in seconds
-- 🔌 **MCP Native**: Seamless integration with Claude Desktop, Cline, and other MCP clients
-- 🎯 **Production-Ready**: Comprehensive test templates for REST, GraphQL, WebSocket, and gRPC
-- 🐳 **Docker Ready**: Full containerization with monitoring stack (Grafana, InfluxDB, Prometheus)
-- 🚦 **CI/CD Native**: GitHub Actions workflows included for automated testing
-- 📊 **Advanced Prompts**: Pre-built conversational workflows for common testing scenarios
-- 🔧 **Extensible**: Modular AI skills, agents, and chat modes
-- 🌐 **Multi-Protocol**: REST, GraphQL, WebSocket, gRPC support out-of-the-box
+- **AI-First Design**: Natural language → k6 test scripts in seconds
+- **MCP Native**: Seamless integration with Claude Desktop, Cline, and other MCP clients
+-  **Production-Ready**: Comprehensive test templates for REST, GraphQL, WebSocket, and gRPC
+- **Docker Ready**: Full containerization with monitoring stack (Grafana, InfluxDB, Prometheus)
+- **CI/CD Native**: GitHub Actions workflows included for automated testing
+-  **Advanced Prompts**: Pre-built conversational workflows for common testing scenarios
+-  **Extensible**: Modular AI skills, agents, and chat modes
+-  **Multi-Protocol**: REST, GraphQL, WebSocket, gRPC support out-of-the-box
 
 
 
@@ -51,7 +51,7 @@
 
 
 
-### 🚀 One-Click Installation
+### One-Click Installation
 
 For most users, just run the provided script for your OS:
 
@@ -68,7 +68,7 @@ This will install dependencies, build the project, and install k6 if needed.
 
 ---
 
-### 🐳 Docker Installation (Recommended for Production)
+### Docker Installation (Recommended for Production)
 
 Run with Docker for isolated, reproducible environments:
 
@@ -109,7 +109,7 @@ docker-compose down
     Use the provided tools or see [tests/](tests/) for ready-to-use scripts.
 
 
-## 📚 Comprehensive Test Examples
+## Comprehensive Test Examples
 
 The project provides production-ready k6 test scripts for modern API architectures:
 
@@ -190,7 +190,7 @@ The `AI/` directory contains modular components for building intelligent agents,
 
 See the [AI/README.md](AI/README.md) and subfolder READMEs for more details and templates.
 
-### 🎯 MCP Prompts for Guided Workflows
+### MCP Prompts for Guided Workflows
 
 The [AI/MCP/prompts.md](AI/MCP/prompts.md) file contains pre-built conversational workflows:
 
@@ -536,9 +536,11 @@ Thank you for making test automation better for everyone! 🚀
 
 
 
-## Author & Maintainer
+## First-Time Contributors Welcome! 👋
 
-**Project Lead:** [Your Name or Organization]
+New to open source? No problem! Look for issues tagged with good-first-issue or help-wanted. We provide mentorship and guidance to help you succeed.
 
-For questions, support, or partnership inquiries, please open an issue or contact the maintainer.
+Thank you for making test automation better for everyone! 🚀
+
+
 
