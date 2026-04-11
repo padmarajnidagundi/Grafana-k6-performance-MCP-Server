@@ -519,15 +519,6 @@ All contributors will be:
 ✅ Listed in CONTRIBUTORS.md (coming soon)
 ✅ Mentioned in release notes for significant contributions
 
-## Questions?
-
-If you have any questions:
-
-- 💬 Open a GitHub Discussion
-- 🐛 Report bugs via GitHub Issues
-- 📧 Email: padmaraj.nidagundi@gmail.com
-- Response time: Typically 24-48 hours
-
 ## First-Time Contributors Welcome! 👋
 
 New to open source? No problem! Look for issues tagged with `good-first-issue` or `help-wanted`. We provide mentorship and guidance to help you succeed.
@@ -541,17 +532,5 @@ If you have any questions:
 
 💬 Open a GitHub Discussion  
 🐛 Report bugs via GitHub Issues  
-📧 Email: padmaraj.nidagundi@gmail.com  
+📧 Email: padmaraj.nidagundi at gmail.com  
 _Response time: Typically 24-48 hours_
-
-## First-Time Contributors Welcome! 👋
-
-New to open source? No problem! Look for issues tagged with `good-first-issue` or `help-wanted`. We provide mentorship and guidance to help you succeed.
-
-Thank you for making test automation better for everyone! 🚀
-
-## First-Time Contributors Welcome! 👋
-
-New to open source? No problem! Look for issues tagged with good-first-issue or help-wanted. We provide mentorship and guidance to help you succeed.
-
-Thank you for making test automation better for everyone! 🚀
