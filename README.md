@@ -194,6 +194,9 @@ The agent modules in `AI/agent/` are lightweight helpers that take a `context` o
 - `test-generation-agent.js`: detects protocol, test type, and the closest starter script in `tests/`
 - `protocol-advisor-agent.js`: recommends the best protocol-specific example for REST, GraphQL, gRPC, or WebSocket testing
 - `result-analysis-agent.js`: interprets pasted k6 metrics and returns a short analysis with next actions
+- `threshold-advisor-agent.js`: suggests p95 latency, error rate, and throughput thresholds calibrated to the detected test type
+- `scenario-builder-agent.js`: detects user journey steps (login, browse, checkout, etc.) and returns a k6 `group()`-based scenario skeleton
+- `ci-cd-agent.js`: recommends CI/CD pipeline integration steps for GitHub Actions, GitLab CI, Jenkins, Azure DevOps, or CircleCI
 
 **Typical usage flow:**
 
@@ -216,6 +219,9 @@ Example follow-up mapping:
 - use `test-generation-agent.js` before creating a new script
 - use `protocol-advisor-agent.js` when choosing between REST, GraphQL, gRPC, and WebSocket examples
 - use `result-analysis-agent.js` after a run to summarize `p95`, error rate, and throughput
+- use `threshold-advisor-agent.js` to generate a `options.thresholds` block before the first run
+- use `scenario-builder-agent.js` when the request describes a multi-step user journey
+- use `ci-cd-agent.js` to get a copy-paste pipeline snippet for your CI/CD platform
 
 These agents are examples only. They are documented templates you can import into your own Node.js orchestration flow; they are not auto-registered as MCP tools by default.
 

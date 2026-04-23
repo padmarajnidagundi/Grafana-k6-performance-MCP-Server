@@ -6,6 +6,9 @@ This folder contains example agent logic for use with the MCP server. Agents can
 - `test-generation-agent.js`: Recommends the right k6 test type, protocol, and example file based on a natural-language request.
 - `result-analysis-agent.js`: Summarizes a k6 run and highlights likely bottlenecks, threshold failures, and next actions.
 - `protocol-advisor-agent.js`: Routes users to the best starter example for REST, GraphQL, gRPC, or WebSocket performance testing.
+- `threshold-advisor-agent.js`: Suggests p95 latency, error rate, and throughput thresholds calibrated to the detected test type.
+- `scenario-builder-agent.js`: Detects user journey steps from a natural-language description and returns a k6 `group()`-based scenario skeleton.
+- `ci-cd-agent.js`: Recommends CI/CD pipeline integration steps for GitHub Actions, GitLab CI, Jenkins, Azure DevOps, or CircleCI.
 - `agent-utils.js`: Shared parsing helpers used by the example agents.
 
 ## How Agents Work
@@ -88,6 +91,62 @@ What it returns:
 - a short findings summary
 - likely problem areas
 - recommended next actions for another test run
+
+### `threshold-advisor-agent.js`
+
+Use this agent when you need to define appropriate k6 threshold values before running a test.
+
+Example input:
+
+```js
+{
+  input: "stress test for a payment REST API";
+}
+```
+
+What it returns:
+
+- recommended p95 latency threshold
+- recommended error rate threshold
+- throughput guidance for the test type
+- a ready-to-paste k6 `options.thresholds` snippet
+
+### `scenario-builder-agent.js`
+
+Use this agent when the user describes a multi-step user journey to simulate.
+
+Example input:
+
+```js
+{
+  input: "user logs in, browses catalog, adds item to cart, and checks out at https://shop.example.com";
+}
+```
+
+What it returns:
+
+- ordered list of detected journey steps
+- configuration hints (protocol, traffic profile, think time)
+- a k6 `group()`-based scenario skeleton ready to fill in
+
+### `ci-cd-agent.js`
+
+Use this agent when you want to automate k6 tests inside a CI/CD pipeline.
+
+Example input:
+
+```js
+{
+  input: "GitHub Actions smoke test on every pull request";
+}
+```
+
+What it returns:
+
+- detected CI/CD platform
+- recommended test type for automation
+- a copy-paste pipeline step snippet
+- checklist of best practices (artifacts, exit codes, env vars)
 
 ## Integrating An Agent
 
