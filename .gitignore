@@ -7,7 +7,8 @@ dist/
 *.js
 *.d.ts
 !jest.config.js
-!examples/**/*.js
+!tests/**/*.js
+!AI/**/*.js
 
 # Test results
 test-results/

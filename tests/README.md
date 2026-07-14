@@ -17,6 +17,7 @@ The examples are now organized by test type:
 - **WebSocket Tests:** `examples/websocket/websocket-test.js`
 - **GraphQL Tests:** `examples/graphql/graphql-test.js`
 - **gRPC Tests:** `examples/grpc/grpc-test.js`
+- **Browser Tests:** `examples/browser/browser-test.js`
 
 ### 1. Basic Load Test
 
@@ -98,6 +99,22 @@ An endurance test that demonstrates:
 
 ```bash
 k6 run examples/soak/soak-test.js
+```
+
+### 6. Browser Test
+
+Path: `examples/browser/browser-test.js`
+A real-browser (UI) test that demonstrates:
+
+- Loading a page in a real Chromium instance via the k6 browser module
+- Waiting for network idle and locating page elements
+- Browser-specific thresholds and metrics
+- Screenshot capture
+
+**Usage:**
+
+```bash
+k6 run examples/browser/browser-test.js
 ```
 
 ## Using Examples with MCP Server
