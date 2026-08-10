@@ -34,7 +34,7 @@
 │   ├── chatmodes/
 │   ├── skills/
 │   └── MCP/
-├── examples/            # k6 test scripts and templates (api, load, ramping, spike, etc.)
+├── tests/               # k6 test scripts and templates (api, load, ramping, spike, etc.)
 ├── src/                 # Main server source code
 ├── install.sh           # One-click install script (Linux/macOS)
 ├── install.ps1          # One-click install script (Windows)
@@ -522,15 +522,14 @@ We are committed to providing a welcoming and inclusive environment. Please adhe
 
 All contributors will be:
 
-✅ Listed in CONTRIBUTORS.md (coming soon)
 ✅ Mentioned in release notes for significant contributions
+✅ Given credit in documentation where applicable
 
 ## First-Time Contributors Welcome! 👋
 
 New to open source? No problem! Look for issues tagged with `good-first-issue` or `help-wanted`. We provide mentorship and guidance to help you succeed.
 
 Thank you for making test automation better for everyone! 🚀
-✅ Given credit in documentation where applicable
 
 ## Questions?
 
