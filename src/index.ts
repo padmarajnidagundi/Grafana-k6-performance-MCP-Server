@@ -12,7 +12,7 @@ import {
 } from '@modelcontextprotocol/sdk/types.js';
 import { spawn } from 'child_process';
 import { readFile, writeFile, mkdir, readdir } from 'fs/promises';
-import { join, dirname } from 'path';
+import { join, dirname, relative, resolve, isAbsolute } from 'path';
 import { fileURLToPath } from 'url';
 import { existsSync } from 'fs';
 
@@ -20,8 +20,23 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Default directory for k6 tests
-const K6_TESTS_DIR = process.env.K6_TESTS_DIR || join(process.cwd(), 'k6-tests');
-const K6_RESULTS_DIR = process.env.K6_RESULTS_DIR || join(process.cwd(), 'k6-results');
+const K6_TESTS_DIR = process.env.K6_TESTS_DIR ? resolve(process.env.K6_TESTS_DIR) : join(process.cwd(), 'k6-tests');
+const K6_RESULTS_DIR = process.env.K6_RESULTS_DIR ? resolve(process.env.K6_RESULTS_DIR) : join(process.cwd(), 'k6-results');
+
+function ensureWithinBaseDir(baseDir: string, targetPath: string): string {
+  const resolvedTarget = resolve(targetPath);
+  const relativePath = relative(baseDir, resolvedTarget);
+
+  // Reject traversal outside the configured test/results directory and disallow direct writes to the directory itself.
+  if (resolvedTarget === baseDir || relativePath.startsWith('..') || isAbsolute(relativePath)) {
+    throw new McpError(
+      ErrorCode.InvalidRequest,
+      `Path is outside the allowed directory: ${targetPath}`
+    );
+  }
+
+  return resolvedTarget;
+}
 
 interface K6TestResult {
   timestamp: string;
@@ -206,7 +221,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       case 'create_k6_test': {
         const { name, script } = request.params.arguments as { name: string; script: string };
         const fileName = name.endsWith('.js') ? name : `${name}.js`;
-        const filePath = join(K6_TESTS_DIR, fileName);
+        const filePath = ensureWithinBaseDir(K6_TESTS_DIR, join(K6_TESTS_DIR, fileName));
         
         await writeFile(filePath, script, 'utf-8');
         
@@ -228,7 +243,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           iterations?: number;
         };
         
-        const testPath = join(K6_TESTS_DIR, testFile);
+        const testPath = ensureWithinBaseDir(K6_TESTS_DIR, join(K6_TESTS_DIR, testFile));
         
         if (!existsSync(testPath)) {
           throw new McpError(
@@ -259,7 +274,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         
         const testNameWithoutExt = removeJsExtension(testFile);
         const resultFileName = `${testNameWithoutExt}-${Date.now()}.json`;
-        const resultPath = join(K6_RESULTS_DIR, resultFileName);
+        const resultPath = ensureWithinBaseDir(K6_RESULTS_DIR, join(K6_RESULTS_DIR, resultFileName));
         await writeFile(resultPath, JSON.stringify(resultData, null, 2), 'utf-8');
 
         return {
@@ -436,7 +451,7 @@ export default function () {
 `;
 
         const fileName = name.endsWith('.js') ? name : `${name}.js`;
-        const filePath = join(K6_TESTS_DIR, fileName);
+        const filePath = ensureWithinBaseDir(K6_TESTS_DIR, join(K6_TESTS_DIR, fileName));
         
         await writeFile(filePath, script, 'utf-8');
 
@@ -512,7 +527,7 @@ server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
   
   if (uri.startsWith('k6://tests/')) {
     const fileName = uri.replace('k6://tests/', '');
-    const filePath = join(K6_TESTS_DIR, fileName);
+    const filePath = ensureWithinBaseDir(K6_TESTS_DIR, join(K6_TESTS_DIR, fileName));
     
     if (!existsSync(filePath)) {
       throw new McpError(ErrorCode.InvalidRequest, `Test file not found: ${fileName}`);
@@ -530,7 +545,7 @@ server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
     };
   } else if (uri.startsWith('k6://results/')) {
     const fileName = uri.replace('k6://results/', '');
-    const filePath = join(K6_RESULTS_DIR, fileName);
+    const filePath = ensureWithinBaseDir(K6_RESULTS_DIR, join(K6_RESULTS_DIR, fileName));
     
     if (!existsSync(filePath)) {
       throw new McpError(ErrorCode.InvalidRequest, `Result file not found: ${fileName}`);
